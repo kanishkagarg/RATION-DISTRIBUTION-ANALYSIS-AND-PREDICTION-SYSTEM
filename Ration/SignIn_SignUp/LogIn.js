@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet ,Switch} from 'react-native';
 import { Button, Input, Header, Footer, Label, Text, Radio, Form, Item, Container, View, Content, Icon } from 'native-base';
-import * as firebase from 'firebase';
+import * as firebase from '../AppIntro/connect';
 
 export default class login extends Component{
 
@@ -11,18 +11,6 @@ export default class login extends Component{
         password : '',
         switch : false
     }
-
-
-    componentWillMount(){
-        firebase.initializeApp({
-            apiKey: "AIzaSyBeKvF8SoCa5erTETgkBU_REBCZOzxgwaw",
-            authDomain: "vikavi-01.firebaseapp.com",
-            databaseURL: "https://vikavi-01.firebaseio.com",
-            projectId: "vikavi-01",
-            storageBucket: "vikavi-01.appspot.com",
-            messagingSenderId: "960925598365"
-          });
-        }
 
     loginUser = (email, password) => {
         try {
@@ -34,6 +22,7 @@ export default class login extends Component{
             console.log(error.toString())
         }
     }
+
 
     createUser = (email, password) => {
         try {
@@ -63,6 +52,7 @@ export default class login extends Component{
                         <Item floatingLabel>
                             <Label>Password</Label>
                             <Input 
+                                secureTextEntry = {true}
                                 value = {this.state.password}
                                 onChangeText = {(value) => this.setState({password : value})}
                             />
@@ -90,32 +80,19 @@ export default class login extends Component{
                     </Form>
                   </View>  
 
-                  <View style={styles.style}>
+                    <View style={styles.style}>
 
-                         <Button
+                        <Button
                          //this is sign up button 
                                 block 
                                 info 
-                                onPress = {() => this.createUser(this.state.Email, this.state.password)}
+                                onPress = {() => this.props.navigation.navigate('SignUp')}
                                 style={{
                                     marginHorizontal:8,
                                     marginTop: 10,
                                     backgroundColor: '#123456',
                         }}>
                             <Text style={{fontSize: 20}}>Sign Up with email</Text>
-                        </Button>
-
-                         <Button
-                         //this is sign up button 
-                                block 
-                                info 
-                                onPress = {() => this.createUser(this.state.Email, this.state.password)}
-                                style={{
-                                    marginHorizontal:8,
-                                    marginTop: 10,
-                                    backgroundColor: '#123456',
-                        }}>
-                            <Text style={{fontSize: 20}}>Sign up with mobile no </Text>
                         </Button>
 
                     </View>
