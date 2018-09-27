@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import { SwitchNavigator, StackNavigator, drawerNavigator, createBottomTabNavigator } from 'react-navigation';
+import { SwitchNavigator, StackNavigator, TabNavigator, createBottomTabNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import LogIn from '../SignIn_SignUp/LogIn';
@@ -79,17 +79,22 @@ export default class App extends Component {
   }
 }
 
-const AppStack = createBottomTabNavigator({
+const AppStack = TabNavigator({
     Home : Home_user,
     Profile : Profile,
     "About Us" : AboutUs
   },
   {
-    initialRouteName : 'Home'
+    initialRouteName : 'Home',
+    tabBarPosition : "bottom",
+    tabBarOptions : {
+      activeTintColor : 'white',
+      labelStyle : {
+        fontSize : 15
+      }
+    }
   }
 );
-
-//const AppStack = StackNavigator({ Home: App_start });
 const AuthStack = StackNavigator({ Home: LogIn });
 const Sign_Up = StackNavigator({ Home: SignUp})
 
