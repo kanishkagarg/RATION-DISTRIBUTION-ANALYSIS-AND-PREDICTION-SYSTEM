@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet ,Switch} from 'react-native';
 import { Button, Input, Header, Footer, Label, Text, Radio, Form, Item, Container, View, Content, Icon } from 'native-base';
-import * as firebase from '../AppIntro/connect';
+import * as firebase from 'firebase';
 
 export default class login extends Component{
+
+    componentWillMount(){
+        if (!firebase.apps.length) {
+            firebase.initializeApp({
+                apiKey: "AIzaSyBeKvF8SoCa5erTETgkBU_REBCZOzxgwaw",
+                authDomain: "vikavi-01.firebaseapp.com",
+                databaseURL: "https://vikavi-01.firebaseio.com",
+                projectId: "vikavi-01",
+                storageBucket: "vikavi-01.appspot.com",
+                messagingSenderId: "960925598365"
+              });
+        }
+    }
+
 
     state = {
         User :'',
@@ -45,6 +59,7 @@ export default class login extends Component{
                         <Item floatingLabel>
                             <Label>Email</Label>
                             <Input value = {this.state.Email}
+                                    keyboardType = "email-address"
                                    onChangeText = {(value) => this.setState({Email : value})}
                             />
                         </Item>

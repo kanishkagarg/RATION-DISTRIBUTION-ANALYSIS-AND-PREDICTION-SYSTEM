@@ -1,11 +1,13 @@
 import React , { Component } from 'react';
-import { SwitchNavigator, StackNavigator } from 'react-navigation';
+import { SwitchNavigator, StackNavigator, drawerNavigator, createBottomTabNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import LogIn from '../SignIn_SignUp/LogIn';
-import App_start from '../User/Home';
+import Home_user from '../User/Home_user';
+import Profile from '../User/Profile';
+import AboutUs from '../Contact/contact';
 import SignUp  from '../SignIn_SignUp/SignUp';
-import * as firebase from './connect';
+import * as firebase from 'firebase';
 
 const styles = StyleSheet.create({
   Head: {
@@ -77,7 +79,17 @@ export default class App extends Component {
   }
 }
 
-const AppStack = StackNavigator({ Home: App_start });
+const AppStack = createBottomTabNavigator({
+    Home : Home_user,
+    Profile : Profile,
+    "About Us" : AboutUs
+  },
+  {
+    initialRouteName : 'Home'
+  }
+);
+
+//const AppStack = StackNavigator({ Home: App_start });
 const AuthStack = StackNavigator({ Home: LogIn });
 const Sign_Up = StackNavigator({ Home: SignUp})
 
